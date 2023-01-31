@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Username and password generator [user;pass]
-// @version      1.0
+// @version      1.1
 // @license      MIT
 // @description  When a password input is detected, it will generate a Username;Password combination and set it to clipboard
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
