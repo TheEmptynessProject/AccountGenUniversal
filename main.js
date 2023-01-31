@@ -10,13 +10,16 @@
 // ==/UserScript==
 (function() {
     'use strict';
+    var run=false;
+    window.setInterval(function(){
+    console.log("Scanning...")
     var inputs = document.getElementsByTagName('input');
-    var run = false;
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].type.toLowerCase() == 'password') {
             run = true;
         }
     }
+    },5000);
 
     let passlen = 16; //Set your desired password length
 
@@ -278,5 +281,6 @@
         user = first[Math.round(Math.random() * first.length)] + second[Math.round(Math.random() * second.length)];
         let output = user + ";" + pass
         GM_setClipboard(output);
+        console.log("Set to clipboard succesfully!")
     }
 })();
