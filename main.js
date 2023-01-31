@@ -5,7 +5,7 @@
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
 // @match        *://*/*
 // @grant        GM_setClipboard
-// @namespace       https://github.com/zerodytrash/Simple-YouTube-Age-Restriction-Bypass/
+// @namespace       https://github.com/TheEmptynessProject/UsernamePasswordGenerator
 // ==/UserScript==
 (function() {
     'use strict';
