@@ -1,1 +1,1 @@
-# UsernamePasswordGenerator
+# Username and Password Generator userscript
