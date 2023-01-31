@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Username and password generator [user;pass]
 // @version      1.0
+// @license      MIT
 // @description  When a password input is detected, it will generate a Username;Password combination and set it to clipboard
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
 // @match        *://*/*
 // @grant        GM_setClipboard
-// @namespace       https://github.com/TheEmptynessProject/UsernamePasswordGenerator
+// @namespace    https://github.com/TheEmptynessProject/UsernamePasswordGenerator
 // ==/UserScript==
 (function() {
     'use strict';
@@ -16,9 +17,9 @@
             run = true;
         }
     }
-    
-    let passlen = 16; //Set your desired password len
-    
+
+    let passlen = 16; //Set your desired password length
+
     if (run) {
         const Letters = "abcdefghijklmnopqrstuvwxyz";
         const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
