@@ -11,20 +11,21 @@
 (function() {
     'use strict';
     var inputs = document.getElementsByTagName('input');
-    let run = false;
-    for (var i = 0; i < inputs.length; i++) {
+    var run = false;
+    for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].type.toLowerCase() == 'password') {
             run = true;
         }
     }
+    
+    let passlen = 16; //Set your desired password len
+    
     if (run) {
-        let Letters = "abcdefghijklmnopqrstuvwxyz"; //25
-        let capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //25
-        let symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>"; //37
-        let numbers = "1234567890" //9
-        let passlen = 16;
-        let userlen = 6;
-        let pass = "";
+        const Letters = "abcdefghijklmnopqrstuvwxyz";
+        const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>"
+        const numbers = "1234567890"
+        var pass = "";
         for (let i = 0; i < passlen; i++) {
             let a = Math.round(Math.random() * 3);
             let x = 0;
@@ -47,7 +48,7 @@
                     break;
             }
         }
-        let user = "";
+        var user = "";
         const first = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas",
             "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir", "Abdulkarem",
             "Abdulkhader", "Abdullah", "Abdul-Majeed", "Abdulmalik", "Abdul-Rehman", "Abdur", "Abdurraheem", "Abdur-Rahman", "Abdur-Rehmaan", "Abel",
