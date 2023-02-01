@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Username and password generator [user;pass]
-// @version      1.1
+// @version      1.2
 // @license      MIT
 // @description  When a password input is detected, it will generate a Username;Password combination and set it to clipboard
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
@@ -10,20 +10,19 @@
 // ==/UserScript==
 (function() {
     'use strict';
-    var run=false;
     window.setInterval(function(){
     console.log("Scanning...")
     var inputs = document.getElementsByTagName('input');
     for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].type.toLowerCase() == 'password') {
-            run = true;
+        if (inputs[i].type.toLowerCase().trim() == 'password') {
+            generate();
+            break;
         }
     }
-    },5000);
+    }, 5000);
 
     let passlen = 16; //Set your desired password length
-
-    if (run) {
+    function generate(){
         const Letters = "abcdefghijklmnopqrstuvwxyz";
         const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>"
