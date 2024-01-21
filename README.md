@@ -1,5 +1,5 @@
 # Account Generator UserScript
-Are you tired of spam emails? Worried about your privacy? Well, then this may be very useful to you:
+Are you tired of spam emails? Worried about your privacy? Well... You are welcome
 
 ## Overview
 The Account Generator UserScript automates secure and unique account credential creation for websites, simplifying the registration process by generating temporary email addresses, usernames, and passwords.
