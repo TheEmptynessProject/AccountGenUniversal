@@ -14,7 +14,7 @@
     'use strict';
 
     let passLen = 16; //Set to your desired password length
-
+generate();
     window.setInterval(function() {
         var inputs = document.getElementsByTagName('input');
         for (let i = 0; i < inputs.length; i++) {
