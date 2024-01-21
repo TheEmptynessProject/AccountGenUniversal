@@ -1,11 +1,11 @@
-# Account Generator UserScript
+# AccountGenUniversal UserScript
 Are you tired of spam emails? Worried about your privacy? Well... You're welcome!
 
 ## Overview
-The Account Generator UserScript automates secure and unique account credential creation for websites, simplifying the registration process by generating temporary email addresses, usernames, and passwords.
+The AccountGenUniversal UserScript automates secure and unique account credential creation for websites, simplifying the registration process by generating temporary email addresses, usernames, and passwords.
 
 ## Features
-**Automatic Password Generation**: When a password input is detected on a webpage, the script generates a strong and random password for enhanced security.
+**Automatic Password Generation**: This script generates a strong and random password for enhanced security.
 
 **Temporary Email Address Generation**: The script uses the **1secmail** API to generate a disposable email address, ensuring user privacy during the account creation process.
 
