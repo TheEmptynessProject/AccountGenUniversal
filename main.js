@@ -13,12 +13,10 @@
 (function() {
     'use strict';
     let passLen = 16; //Set to your desired password length
-    // Load SweetAlert2 library
     const SwalScript = document.createElement('script');
     SwalScript.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
     document.head.appendChild(SwalScript);
 
-    // Wait for DOMContentLoaded event
     window.addEventListener('load', () => {
         new Promise((resolve) => {
             SwalScript.onload = resolve;
@@ -59,7 +57,6 @@
                     });
                 });
             }
-
 
             function waitForEmail(email) {
                 const intervalId2 = setInterval(function() {
