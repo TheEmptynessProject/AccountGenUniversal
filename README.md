@@ -22,7 +22,7 @@ The Account Generator UserScript automates secure and unique account credential 
 6. Done
 
 ## Customization
-Adjust the password length by modifying the passLen variable in the script.
+Adjust the password length by modifying the *passLen* variable in the script.
 Customize the list of first and second names for username generation to suit your preferences.
 
 ## License
