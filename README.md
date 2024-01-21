@@ -1,1 +1,1 @@
-# Username and Password Generator userscript
+# Email ; Username ; Password Tampermonkey script
