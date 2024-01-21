@@ -21,13 +21,60 @@
     }
     }, 5000);
 
+    function getEmail() {
+        // Generate temporary email
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: "https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1",
+            onload: function(response) {
+                return response.response[0];
+            }
+        });
+    }
+    function waitForEmail(email) {
+        const intervalId = setInterval(function() {
+            GM_xmlhttpRequest({
+                method: "GET",
+                url: `https://www.1secmail.com/api/v1/?action=getMessages&login=${email.substring(0, email.indexOf('@'))}&domain=${email.substring(email.indexOf('@') + 1)}`,
+                onload: function(response) {
+                    const ref_response = JSON.parse(response.responseText);
+
+                    if (ref_response.length > 0) {
+                        const first_msg = ref_response[0];
+                        const msg_id = first_msg.id;
+                        const from_msg = first_msg.from || 'Unknown Sender';
+                        const subject = first_msg.subject || 'No Subject';
+                        const date = first_msg.date || 'No Date';
+
+                        const msg_details = `From: ${from_msg}\nSubject: ${subject}`;
+
+                        GM_xmlhttpRequest({
+                            method: "GET",
+                            url: `https://www.1secmail.com/api/v1/?action=readMessage&login=${email.substring(0, email.indexOf('@'))}&domain=${email.substring(email.indexOf('@') + 1)}&id=${msg_id}`,
+                            onload: function(bodyResponse) {
+                                const msg_body_response = JSON.parse(bodyResponse.responseText);
+                                const msg_body = msg_body_response.body || 'No Body';
+                                alert(msg_details + "\nContent:\n" + msg_body);
+
+                                clearInterval(intervalId);
+                            }
+                        });
+                    } else {
+                        console.log("No messages were received in your Mailbox.");
+                    }
+                }
+            });
+        }, 1000);
+    }
+
     let passlen = 16; //Set your desired password length
     function generate(){
+        let email = getEmail();
         const Letters = "abcdefghijklmnopqrstuvwxyz";
         const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>"
         const numbers = "1234567890"
-        var pass = "";
+        let pass = "";
         for (let i = 0; i < passlen; i++) {
             let a = Math.round(Math.random() * 3);
             let x = 0;
@@ -50,7 +97,7 @@
                     break;
             }
         }
-        var user = "";
+        let user = "";
 const first = [
   'James', 'Sophia', 'Ahmed', 'Maria', 'Chen', 'Isabella', 'Muhammad', 'Emma', 'Juan', 'Aya',
   'Mateo', 'Fatima', 'Liam', 'Sophie', 'Raj', 'Mia', 'Luca', 'Sofia', 'Yuki', 'Andrei',
@@ -66,8 +113,8 @@ const first = [
   'Avalanche', 'Phoenix', 'Pegasus', 'Spectre', 'Cascade', 'Veridian', 'Abyss', 'Torrent', 'Cascade', 'Mirage'
 ];
         user = first[Math.round(Math.random() * first.length)] + second[Math.round(Math.random() * second.length)];
-        let output = user + ";" + pass
+        let output = email + ";" + user + ";" + pass
         GM_setClipboard(output);
-        console.log("Set to clipboard succesfully!")
+        waitForEmail(email);
     }
 })();
