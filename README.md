@@ -18,7 +18,7 @@ The Account Generator UserScript automates secure and unique account credential 
 2. Add the Account Generator script to your UserScript manager.
 3. Visit a website with an account registration form.
 4. The script will automatically generate and copy account details to the clipboard.
-5. The script waits for an email to be sent to the generated email. It then opens a popup if it is allowed, if not, it logs the email to the console (in HTML so not very readable), and sets clipboard to the url, where you can see the email like normal (just open a new tab and paste it!).
+5. The script waits for an email to be sent to the generated email. It then opens a popup if it is allowed, if not, it logs the email to the console as a assurance, though it is not very readable and sets your clipboard to the url where you can see the email like normal (just open a new tab and paste it!).
 6. Done
 
 ## Customization
