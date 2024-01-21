@@ -2,27 +2,53 @@
 // @name         Username and password generator [user;pass]
 // @version      1.2
 // @license      MIT
-// @description  When a password input is detected, it will generate a Username;Password combination and set it to clipboard
+// @description  When a password input is detected, it will generate a Email;Username;Password combination and set it to clipboard, then it waits until a email was received and alerts the user of it
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
 // @match        *://*/*
 // @grant        GM_setClipboard
 // @namespace    https://github.com/TheEmptynessProject/UsernamePasswordGenerator
 // ==/UserScript==
+
 (function() {
     'use strict';
-    window.setInterval(function(){
-    console.log("Scanning...")
-    var inputs = document.getElementsByTagName('input');
-    for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].type.toLowerCase().trim() == 'password') {
-            generate();
-            break;
+
+    let passLen = 16; //Set to your desired password length
+
+    window.setInterval(function() {
+        var inputs = document.getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].type.toLowerCase().trim() == 'password') {
+                generate();
+                break;
+            }
         }
-    }
     }, 5000);
 
+    function generatePassword(leng) {
+        const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+        const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numbers = "1234567890";
+        const symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>";
+        const all = lowerLetters + upperLetters + numbers + symbols;
+        let pass = "";
+
+        pass += lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
+        pass += upperLetters[Math.floor(Math.random() * upperLetters.length)];
+        pass += numbers[Math.floor(Math.random() * numbers.length)];
+        pass += symbols[Math.floor(Math.random() * symbols.length)];
+
+        for (let i = 4; i < leng; i++) {
+            pass += all[Math.floor(Math.random() * all.length)];
+        }
+
+        pass = pass.split('').sort(function() {
+            return 0.5 - Math.random()
+        }).join('');
+
+        return pass;
+    }
+
     function getEmail() {
-        // Generate temporary email
         GM_xmlhttpRequest({
             method: "GET",
             url: "https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1",
@@ -31,6 +57,7 @@
             }
         });
     }
+
     function waitForEmail(email) {
         const intervalId = setInterval(function() {
             GM_xmlhttpRequest({
@@ -59,62 +86,34 @@
                                 clearInterval(intervalId);
                             }
                         });
-                    } else {
-                        console.log("No messages were received in your Mailbox.");
                     }
                 }
             });
         }, 1000);
     }
 
-    let passlen = 16; //Set your desired password length
-    function generate(){
+    function generate() {
         let email = getEmail();
-        const Letters = "abcdefghijklmnopqrstuvwxyz";
-        const capLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const symbols = "\|!@#£€$§%&/([)]=}?'«»+*¨´`ºª~^,.:-_<>"
-        const numbers = "1234567890"
-        let pass = "";
-        for (let i = 0; i < passlen; i++) {
-            let a = Math.round(Math.random() * 3);
-            let x = 0;
-            switch (a) {
-                case 0:
-                    x = Math.round(Math.random() * Letters.length);
-                    pass += Letters.charAt(x);
-                    break;
-                case 1:
-                    x = Math.round(Math.random() * capLetters.length);
-                    pass += capLetters.charAt(x);
-                    break;
-                case 2:
-                    x = Math.round(Math.random() * symbols.length);
-                    pass += symbols.charAt(x);
-                    break;
-                case 3:
-                    x = Math.round(Math.random() * numbers.length);
-                    pass += numbers.charAt(x);
-                    break;
-            }
-        }
+        let pass = generatePassword(passLen);
         let user = "";
-const first = [
-  'James', 'Sophia', 'Ahmed', 'Maria', 'Chen', 'Isabella', 'Muhammad', 'Emma', 'Juan', 'Aya',
-  'Mateo', 'Fatima', 'Liam', 'Sophie', 'Raj', 'Mia', 'Luca', 'Sofia', 'Yuki', 'Andrei',
-  'Olivia', 'Pedro', 'Amara', 'Kai', 'Leila', 'Alejandro', 'Elsa', 'Ahmed', 'Amina', 'Viktor',
-  'Alice', 'Diego', 'Maya', 'Hugo', 'Sarah', 'Ivan', 'Jasmine', 'Santiago', 'Camila', 'Felix',
-  'Aisha', 'Daniel', 'Nia', 'Fabio', 'Anastasia', 'Khaled', 'Luna', 'Oscar', 'Priya', 'Amir'
-];
+        const first = [
+            'James', 'Sophia', 'Ahmed', 'Maria', 'Chen', 'Isabella', 'Muhammad', 'Emma', 'Juan', 'Aya',
+            'Mateo', 'Fatima', 'Liam', 'Sophie', 'Raj', 'Mia', 'Luca', 'Sofia', 'Yuki', 'Andrei',
+            'Olivia', 'Pedro', 'Amara', 'Kai', 'Leila', 'Alejandro', 'Elsa', 'Ahmed', 'Amina', 'Viktor',
+            'Alice', 'Diego', 'Maya', 'Hugo', 'Sarah', 'Ivan', 'Jasmine', 'Santiago', 'Camila', 'Felix',
+            'Aisha', 'Daniel', 'Nia', 'Fabio', 'Anastasia', 'Khaled', 'Luna', 'Oscar', 'Priya', 'Amir'
+        ];
         const second = [
-  'Zephyr', 'Jamboree', 'Whimsy', 'Gobsmack', 'Bumble', 'Quasar', 'Lullaby', 'Zigzag', 'Sassafras', 'Galaxy',
-  'Quokka', 'Noodle', 'Bamboo', 'Pumpernickel', 'Sphinx', 'Lollipop', 'Blizzard', 'Muffin', 'Quicksilver', 'Jellybean',
-  'Penguin', 'Chameleon', 'Umbrella', 'Moonbeam', 'Sasquatch', 'Jigsaw', 'Kangaroo', 'Rhubarb', 'Waffle', 'Flapdoodle',
-  'Brouhaha', 'Cactus', 'Turbulence', 'Platypus', 'Tango', 'Fandango', 'Gobbledygook', 'Kaleidoscope', 'Serenity',
-  'Avalanche', 'Phoenix', 'Pegasus', 'Spectre', 'Cascade', 'Veridian', 'Abyss', 'Torrent', 'Cascade', 'Mirage'
-];
+            'Zephyr', 'Jamboree', 'Whimsy', 'Gobsmack', 'Bumble', 'Quasar', 'Lullaby', 'Zigzag', 'Sassafras', 'Galaxy',
+            'Quokka', 'Noodle', 'Bamboo', 'Pumpernickel', 'Sphinx', 'Lollipop', 'Blizzard', 'Muffin', 'Quicksilver', 'Jellybean',
+            'Penguin', 'Chameleon', 'Umbrella', 'Moonbeam', 'Sasquatch', 'Jigsaw', 'Kangaroo', 'Rhubarb', 'Waffle', 'Flapdoodle',
+            'Brouhaha', 'Cactus', 'Turbulence', 'Platypus', 'Tango', 'Fandango', 'Gobbledygook', 'Kaleidoscope', 'Serenity',
+            'Avalanche', 'Phoenix', 'Pegasus', 'Spectre', 'Cascade', 'Veridian', 'Abyss', 'Torrent', 'Cascade', 'Mirage'
+        ];
         user = first[Math.round(Math.random() * first.length)] + second[Math.round(Math.random() * second.length)];
         let output = email + ";" + user + ";" + pass
         GM_setClipboard(output);
         waitForEmail(email);
     }
+    
 })();
