@@ -14,7 +14,7 @@
     'use strict';
 
     let passLen = 16; //Set to your desired password length
-generate();
+
     window.setInterval(function() {
         var inputs = document.getElementsByTagName('input');
         for (let i = 0; i < inputs.length; i++) {
@@ -50,16 +50,18 @@ generate();
     }
 
     function getEmail() {
-return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method: "GET",
                 url: "https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1",
                 onload: function(response) {
-                    resolve(response.response[0]);
+                    let res = JSON.parse(response.response)[0]
+                    resolve(res);
                 }
             });
         });
     }
+
 
     function waitForEmail(email) {
         const intervalId = setInterval(function() {
@@ -95,8 +97,8 @@ return new Promise(function(resolve, reject) {
         }, 1000);
     }
 
-    function generate() {
-        let email = getEmail();
+    async function generate() {
+        let email = await getEmail();
         let pass = generatePassword(passLen);
         let user = "";
         const first = [
