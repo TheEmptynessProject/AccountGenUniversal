@@ -6,6 +6,7 @@
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
 // @match        *://*/*
 // @grant        GM_setClipboard
+// @grant        GM_xmlhttpRequest
 // @namespace    https://github.com/TheEmptynessProject/AccountGenUniversal
 // ==/UserScript==
 
