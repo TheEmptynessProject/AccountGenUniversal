@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         Account generator [email;user;pass]
+// @name         AccountGenUniversal
 // @version      2.0
 // @license      MIT
-// @description  When a password input is detected, it will generate a Email;Username;Password combination and set it to clipboard, then it waits until a email was received and alerts the user of it
+// @description  Wondering how to use? Check out the readme down here \/
+// @namespace    https://github.com/TheEmptynessProject/AccountGenUniversal
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
 // @match        *://*/*
 // @grant        GM_setClipboard
 // @grant        GM_xmlhttpRequest
-// @namespace    https://github.com/TheEmptynessProject/AccountGenUniversal
 // ==/UserScript==
 
 (function() {
