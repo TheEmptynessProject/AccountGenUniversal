@@ -1,4 +1,4 @@
-# Email ; Username ; Password Tampermonkey script
+# Account Generator UserScript
 
 ## Overview
 The Account Generator UserScript is a powerful tool designed to assist users in generating secure and unique account credentials for websites. It automates the process of creating email addresses, usernames, and passwords, providing a convenient and secure method for handling account registrations.
