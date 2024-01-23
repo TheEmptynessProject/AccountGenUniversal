@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Account Generator
-// @version      2.1
+// @version      2.2
 // @license      MIT
 // @description  When a password input is detected, it will generate a Email;Username;Password combination and set it to clipboard, then it waits until a email was received and alerts the user of it
 // @author       TheEmptynessProject (https://github.com/TheEmptynessProject)
@@ -14,14 +14,7 @@
 (function() {
     'use strict';
     let passLen = 16; //Set to your desired password length
-    const SwalScript = document.createElement('script');
-    SwalScript.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
-    document.head.appendChild(SwalScript);
-
-    window.addEventListener('load', () => {
-        new Promise((resolve) => {
-            SwalScript.onload = resolve;
-        }).then(() => {
+    GM_registerMenuCommand('Generate', generate);
             function generatePassword(leng) {
                 const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
                 const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -126,7 +119,4 @@
                 GM_setClipboard(output);
                 waitForEmail(email);
             }
-            GM_registerMenuCommand('Generate Details', generate());
-        })
-    });
 })();
